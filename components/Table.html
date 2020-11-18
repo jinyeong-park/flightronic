@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Table</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type='text/babel'>
+
+    class Table1 extends React.Component {
+      render() {
+
+        return <div>
+                    <h1>{this.props.title}</h1>
+                    <table>
+                      <thead>
+                        <tr>
+                          <td>Name</td>
+                          <td>Age</td>
+                          <td>City</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Jenny</td>
+                          <td>30</td>
+                          <td>San Francisco</td>
+                        </tr>
+                        <tr>
+                          <td>Alex</td>
+                          <td>22</td>
+                          <td>Mountain View</td>
+                        </tr>
+                      </tbody>
+                    </table>
+               </div>
+      }
+    }
+
+    // dynamically generate a table contents
+    class Table2 extends React.Component {
+      render() {
+
+        var customers = [{name: "Jenny", age: 30, city: "San Francisco"}, {name: "Alex", age: 22, city: "Mountain View"}]
+        return <div>
+                    <h1>{this.props.title}</h1>
+                    <table>
+                      <thead>
+                        <tr>
+                          <td>Name</td>
+                          <td>Age</td>
+                          <td>City</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {customers.map(customer =>
+                        <tr>
+                          <td>{customer.name}</td>
+                          <td>{customer.age}</td>
+                          <td>{customer.city}</td>
+                        </tr>)}
+                      </tbody>
+                    </table>
+
+               </div>
+      }
+    }
+
+      ReactDOM.render(
+        <div>
+          <Table2 title='List of Customers2'/>
+        </div>
+      , document.getElementById('root'))
+    </script>
+  </body>
+</html>
