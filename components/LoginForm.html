@@ -12,6 +12,13 @@
     <div id="root"></div>
     <script type='text/babel'>
     class Login extends React.Component {
+
+      handleSubmit(event) {
+        alert('Inside Handle Submit')
+        console.log('event', event)
+        console.log('this', this)
+      }
+
       render() {
         return <div>
                     <h1>{this.props.title}</h1>
@@ -21,7 +28,7 @@
                     <label>Password </label>
                     <input type='password' />
                     <br/><br/>
-                    <input type='button' value="Submit" />
+                    <input type='button' value="Submit" onClick={this.handleSubmit.bind(this)}/>
                 </div>;
       }
     }
