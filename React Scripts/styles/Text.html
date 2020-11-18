@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Styles - text</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    <!-- <style>
+      .text {
+        background-color: rgb(92, 91, 91);
+        color: rgb(250, 249, 249);
+        font-size: 30px;
+        text-align: center;
+        padding: 10px;
+        margin: 10px;
+      }
+    </style> -->
+
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type='text/babel'>
+
+      class Text extends React.Component {
+        render() {
+          var textStyle = {
+            backgroundColor: this.props.bgcolor,
+            color: "white",
+            fontSize: 30,
+            textAlign: "center",
+            padding: 10,
+            margin: 10
+          };
+
+          return (
+            <div style={textStyle}>
+              {this.props.children}
+            </div>
+
+          )
+        }
+      }
+      ReactDOM.render(
+        <div>
+          <Text bgcolor="gray">USA</Text>
+          <Text bgcolor="lightgray">UK</Text>
+          <Text bgcolor="gray">Korea</Text>
+          <Text bgcolor="lightgray">Thailand</Text>
+        </div>, document.getElementById('root'))
+    </script>
+  </body>
+</html>
