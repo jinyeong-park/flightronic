@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ListStudents</title>
+    <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type='text/babel'>
+
+    // separate table component to two components (RowCreator & Table3)
+    class RowCreator extends React.Component {
+    render() {
+      var customer = this.props.item;
+      return <tr>
+                <td>{customer.name}</td>
+                <td>{customer.age}</td>
+                <td>{customer.city}</td>
+              </tr>
+    }
+  }
+
+  var Customers = [{name: "Jenny", age: 30, city: "San Francisco"},
+                   {name: "Alex", age: 22, city: "Mountain View"},
+                   {name: "Katie", age: 28, city: "Los Angeles"},
+                   {name: "Daniel", age: 28, city: "Sunnyvale"},
+                   ]
+
+  class Search extends React.Component {
+
+      constructor(props) {
+        super(props);
+        this.state = {
+          customers: Customers,
+          customersClone: Customers
+        }
+      }
+      // retain main Customers array and filter in customersClone
+
+      handleOnChange(event) {
+        // console.log('event.target.value', event.target.value)
+
+        const filterString = event.target.value.toLowerCase();
+        const filteredCustomers = [];
+
+        // search by name or city
+        for (let customer of this.state.customers) {
+          if ((customer.name.toLowerCase().indexOf(filterString) >= 0) ||
+              (customer.city.toLowerCase().indexOf(filterString) >= 0)) {
+                filteredCustomers.push(customer)
+          }
+        }
+        // change customerClone
+        this.setState({
+          customersClone: filteredCustomers
+            })
+      }
+
+
+      render() {
+
+        return <div>
+                    <h1>{this.props.title}</h1>
+                    <input type='text' placeholder="Search by name or city" onChange={this.handleOnChange.bind(this)} />
+                    <table>
+                      <thead>
+                        <tr>
+                          <td>Name</td>
+                          <td>Age</td>
+                          <td>City</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {this.state.customersClone.map(customer => <RowCreator item={customer}/>
+                        )}
+                      </tbody>
+                    </table>
+
+               </div>
+      }
+    }
+
+      ReactDOM.render(
+        <div>
+          <ListCustomers title='List of Customers'/>
+        </div>
+      , document.getElementById('root'))
+    </script>
+  </body>
+</html>
